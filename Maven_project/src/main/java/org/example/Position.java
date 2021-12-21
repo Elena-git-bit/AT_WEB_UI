@@ -39,6 +39,7 @@ public class Position {
             driver.findElement(By.xpath("//div[contains(@class, 'hide_mobile')]//span[.='Настройки профиля']")).click();
             driver.findElement(By.xpath("//input[@name=\"Position\"]")).clear();
             driver.findElement(By.xpath("//input[@name=\"Position\"]")).sendKeys("Директор");
+            driver.findElement(By.xpath("//button[.='Сохранить настройки']")).click();
 
             driver.quit();
         }

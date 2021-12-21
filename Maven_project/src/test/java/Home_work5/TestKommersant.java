@@ -16,14 +16,19 @@ import java.time.Duration;
 public class TestKommersant {
 
     static WebDriver driver;
+    static ChromeOptions options;
 
     @BeforeAll
     static void precondition() {
         WebDriverManager.chromedriver().setup();
-        ChromeOptions options = new ChromeOptions();
+        options = new ChromeOptions();
 
         options.addArguments("--incognito")
                 .addArguments("start-maximized");
+    }
+
+    @BeforeEach
+    void setupDriver() {
         driver = new ChromeDriver(options);
 
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3) ); //(3, TimeUnit.SECONDS);  //(Duration.ofSeconds(3) );
@@ -66,6 +71,7 @@ public class TestKommersant {
         driver.findElement(By.xpath("//div[contains(@class, 'hide_mobile')]//span[.='Настройки профиля']")).click();
         driver.findElement(By.xpath("//input[@name=\"Position\"]")).clear();
         driver.findElement(By.xpath("//input[@name=\"Position\"]")).sendKeys("Директор");
+        driver.findElement(By.xpath("//input[@name=\"Position\"]")).submit();
        // driver.findElement(By.xpath("//button[.='Сохранить настройки']")).click();
         driver.findElement(By.xpath("//div[contains(@class, 'hide_mobile')]//span[.='Мой профиль']")).click();
         WebElement result2 = driver.findElement(By.xpath("//p[contains(., 'Должность:')]/span"));
